@@ -1,157 +1,58 @@
-function playGame() {
+// Function that handles the game logic
+function playRound(playerSelection) {
 
-  // create human score and start ot to 0
-  const humanScore = 0;
-  const computerScore = 0;
-
-  // create prompt to get human choice 
-
-  function getHumanChoice() {
-
-    let choice = window.prompt(
-      "What's your choice ? (rock, paper or scissors)"
-    );
-
-    // console.log human choice 
-    console.log("Your choice is :", choice);
-    return choice;
-  }
-
-  // create function for computer choice 
-  function getComputerChoice() {
-
-    // create an array of the list of output word
-    const word = ["rock", "paper", "scissors"];
-
-    const randomWord = Math.floor(Math.random() * word.length);
-
-    console.log("The computer choice is :", word[randomWord]);
-
-    return word[randomWord];
-  }
-
-      rock_paper = "You lose ! Paper beats Rock.";
-      rock_scissors = "You win ! Rock beats Paper.";
-      paper_scissors = "You lose ! Scissors beats Paper.";
-      paper_rock = "You win ! Papers beat Rock.";
-      scissors_rock = "You lose ! Rock beats Scissors.";
-      scissors_paper = "You win ! Scissors beats Paper.";
-      rock_rock = "Nobody win, equality !";
-      paper_paper = "Nobody win, equality !";
-      scissors_scissors = "Nobody win, equality !";
-
-  function playRound(humanChoice, computerChoice) {
-
-    let hscore = 0;
-    let cscore = 0;
-
-    humanChoice = humanChoice.toLowerCase();
-
-    computerChoiceChoice = computerChoice.toLowerCase();
-
-    if (humanChoice === "rock" && computerChoice === "rock") {
-      console.log(rock_rock);
-    } else if (humanChoice === "rock" && computerChoice === "scissors") {
-      console.log(rock_scissors);
-      hscore = humanScore + 1;
-    } else if (humanChoice === "rock" && computerChoice === "paper") {
-      console.log(rock_paper);
-      cscore = computerScore + 1;
-    } else if (humanChoice === "paper" && computerChoice === "rock") {
-      console.log(paper_rock);
-      hscore = humanScore + 1;
-    } else if (humanChoice === "paper" && computerChoice === "scissors") {
-      console.log(paper_scissors);
-      cscore = computerScore + 1;
-    } else if (humanChoice === "scissors" && computerChoice === "rock") {
-      console.log(scissors_rock);
-      cscore = computerScore + 1;
-    } else if (humanChoice === "scissors" && computerChoice === "paper") {
-      console.log(scissors_paper);
-      hscore = humanScore + 1;
-    } else if (humanChoice === "paper" && computerChoice === "paper") {
-      console.log(paper_paper);
-    } else if (humanChoice === "scissors" && computerChoice === "scissors") {
-      console.log(scissors_scissors);
-    } else {
-      console.log(
-        `There is an error, you submit ${humanChoice} (the computer submit ${computerChoice} by the way).`
-      );
-    }
-
-    function scoreHuman() {
-
-      let humScore = 0;
-      humScore = humScore + hscore;
-      return humScore;
-    }
-
-    function scoreComputer() {
-
-      let comScore = 0;
-      comScore = comScore + cscore;
-      return comScore;
-    }
+  // For now, just log the playerSelection to the console
+  console.log("Player selected: " + playerSelection);
+  
+  // Assuming you have a function that determines the computer's selection and compares it with playerSelection
+  // Add more logic for game rules (Rock beats Scissors, Scissors beats Paper, etc.) here
+  // For simplicity, I'll just log a sample computer choice.
 
 
-    const PersonalScore = scoreHuman();
-    const ComputerScor = scoreComputer();
-    return {
-      PersonalScore,
-      ComputerScor,
-    };
-  }
+  let computerChoice = getComputerChoice();
+  console.log("Computer selected: " + computerChoice);
 
-  const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
-  const scores = playRound(humanSelection, computerSelection);
-  return scores;
+  // Game outcome logic
+
+  let result = determineWinner(playerSelection, computerChoice);
+  console.log(result);
 }
 
-// end of playGame function
-
-let score = playGame();
-let scoreh = score.PersonalScore;
-let scorec = score.ComputerScor;
-
-console.log(
-  `The score is actually : ${scoreh} for you and ${scorec} for computer !`
-);
-
-score = playGame();
-scoreh = scoreh + score.PersonalScore;
-scorec = scorec + score.ComputerScor;
-
-console.log(
-  `The score is actually : ${scoreh} for you and ${scorec} for computer !`
-);
-
-score = playGame();
-scoreh = scoreh + score.PersonalScore;
-scorec = scorec + score.ComputerScor;
-
-console.log(
-  `The score is actually : ${scoreh} for you and ${scorec} for computer !`
-);
-
-score = playGame();
-scoreh = scoreh + score.PersonalScore;
-scorec = scorec + score.ComputerScor;
-
-console.log(
-  `The score is actually : ${scoreh} for you and ${scorec} for computer !`
-);
-
-score = playGame();
-scoreh = scoreh + score.PersonalScore;
-scorec = scorec + score.ComputerScor;
-
-console.log(
-  `The score is actually : ${scoreh} for you and ${scorec} for computer !`
-);
-
-if (scoreh > scorec) {
-  console.log("You win ! GG man !");
-} else {
-  console.log("Computer wins ! Nice try !");
+// Function to simulate a random computer choice
+function getComputerChoice() {
+  const choices = ["rock", "paper", "scissors"];
+  return choices[Math.floor(Math.random() * choices.length)];
 }
+
+// Function to determine the winner
+function determineWinner(playerSelection, computerChoice) {
+  if (playerSelection === computerChoice) {
+      return "It's a tie!";
+  }
+
+  if (
+      (playerSelection === "rock" && computerChoice === "scissors") ||
+      (playerSelection === "paper" && computerChoice === "rock") ||
+      (playerSelection === "scissors" && computerChoice === "paper")
+  ) {
+      return "You win!";
+  } else {
+      return "You lose!";
+  }
+}
+
+// Add event listeners to buttons
+document.getElementById("rock").addEventListener("click", function() {
+  playRound("rock");
+});
+
+document.getElementById("paper").addEventListener("click", function() {
+  playRound("paper");
+});
+
+document.getElementById("scissors").addEventListener("click", function() {
+  playRound("scissors");
+});
+
+
+document.getElementById("result")= 'result';
