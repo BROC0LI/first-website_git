@@ -55,4 +55,6 @@ document.getElementById("scissors").addEventListener("click", function() {
 });
 
 
-document.getElementById("result")= 'result';
+document.getElementById("result")= result1 ;
+
+let result1 = determineWinner(playerSelection, computerChoice);
